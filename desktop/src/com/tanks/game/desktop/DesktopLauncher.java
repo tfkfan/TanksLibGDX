@@ -6,7 +6,11 @@ import com.tanks.game.TanksApp;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new TanksApp(), config);
+		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
+		cfg.title = "Tanks 2D";
+		cfg.width = 1200;
+		cfg.height = 800;
+		cfg.useGL30 = true;
+		new LwjglApplication(new TanksApp(), cfg);
 	}
 }
