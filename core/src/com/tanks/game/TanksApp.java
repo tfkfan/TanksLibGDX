@@ -10,6 +10,6 @@ public class TanksApp extends Game {
 	@Override
 	public void create () {
 		this.setScreen(mainScreen);
-		
+
 	}
 }
