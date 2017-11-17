@@ -10,7 +10,6 @@ public class DesktopLauncher {
 		cfg.title = "Tanks 2D";
 		cfg.width = 1200;
 		cfg.height = 800;
-		cfg.useGL30 = true;
 		new LwjglApplication(new TanksApp(), cfg);
 	}
 }

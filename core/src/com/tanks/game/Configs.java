@@ -12,4 +12,9 @@ public class Configs {
 	public static final Integer PLAYER_SPRITE_COLUMNS_NUM = 8;
 	
 	public static final String PLAYER_SPRITE_PATH = "sprites.jpg";
+	
+	public static final float PPM = 100f;
+	
+	public static final float VIEW_WIDTH = 1200;
+	public static final float VIEW_HEIGHT = 900;
 }
