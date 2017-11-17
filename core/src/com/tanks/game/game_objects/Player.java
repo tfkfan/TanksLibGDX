@@ -12,7 +12,7 @@ import static com.tanks.game.Configs.pSizeX;
 import static com.tanks.game.Configs.pSizeY;
 import static com.tanks.game.Configs.PLAYER_SPRITE_PATH;
 
-public class Player implements GameObject{
+public class Player extends Sprite {
 	
 	protected Vector2 position;
 	protected Vector2 velocity;
