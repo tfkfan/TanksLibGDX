@@ -6,12 +6,9 @@ import java.util.Scanner;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import static com.tanks.game.Configs.BRICK_CODE;
 import static com.tanks.game.Configs.WALL_CODE;
 import static com.tanks.game.Configs.EMPTY_CODE;
-import static com.tanks.game.Configs.cellSizeX;
-import static com.tanks.game.Configs.cellSizeY;
 import static com.tanks.game.Configs.PPM;
 
 public class Map {
@@ -20,6 +17,10 @@ public class Map {
 	private Integer x_size;
 	private SpriteBatch batch;
 	private Texture[] textures;
+	private final float cx = 100 / PPM;
+	private final float cy = 100 / PPM;
+	private float width, height;
+	
 
 	public Map(SpriteBatch batch, String path) throws Exception {
 		x_size = y_size = 0;
@@ -43,6 +44,8 @@ public class Map {
 
 		y_size = lines.size();
 		x_size = lines.get(0).length();
+		width = cx * x_size;
+		height = cy * y_size;
 
 		MapObject[][] mObjs = new MapObject[y_size][x_size];
 
@@ -80,8 +83,6 @@ public class Map {
 	}
 
 	public void render() {
-		final float cx = 100 / PPM;
-		final float cy = 100 / PPM;
 		for (int i = 0; i < y_size; i++) {
 			for (int j = 0; j < x_size; j++) {
 				MapObject obj = mapLayers[i][j];
@@ -97,6 +98,18 @@ public class Map {
 					batch.draw(textures[1], x , y, cx, cy);
 			}
 		}
+	}
+	
+	public void collision(float x, float y) {
+		if(x < 0 || x > width || y < 0 || y > height)
+			return;
+		
+		int i = (int)(y/cy);
+		int j = (int)(x/cx);
+		
+		MapObject obj = mapLayers[i][j];
+		if(obj.isDestructible())
+			obj.setActive(false);
 	}
 
 	public MapObject[][] getMapLayers() {

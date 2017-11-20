@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tanks.game.game_objects.Player;
+import com.tanks.game.world.Map;
 import com.tanks.game.world.WorldRenderer;
 
 import static com.tanks.game.Configs.VIEW_WIDTH;
@@ -24,6 +25,7 @@ public class MainScreen implements Screen {
 	private OrthographicCamera cam;
 	private Viewport viewport;
 	private WorldRenderer worldRenderer;
+	private Map map;
 
 	float dx = 0;
 
@@ -41,6 +43,7 @@ public class MainScreen implements Screen {
 		worldRenderer = new WorldRenderer();
 		try {
 			worldRenderer.initWorld(cam, batch);
+			map = worldRenderer.getMap();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,6 +60,7 @@ public class MainScreen implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		map.collision(player.getPosition().x, player.getPosition().y);
 		// DRAWING GAME OBJECTS
 		batch.begin();
 		worldRenderer.render();
