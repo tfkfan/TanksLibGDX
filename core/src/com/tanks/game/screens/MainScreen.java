@@ -39,7 +39,12 @@ public class MainScreen implements Screen {
 		viewport.apply();
 
 		worldRenderer = new WorldRenderer();
-		worldRenderer.initWorld(cam);
+		try {
+			worldRenderer.initWorld(cam, batch);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		Gdx.app.log(title, "Hi1!");
 	}
@@ -48,25 +53,19 @@ public class MainScreen implements Screen {
 	public void render(float delta) {
 		handleInput();
 		cam.update();
-
 		batch.setProjectionMatrix(cam.combined);
-
-		worldRenderer.world.step(0.01f, 6, 2);
-
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		worldRenderer.render();
-
-		batch.begin();
 		// DRAWING GAME OBJECTS
-
+		batch.begin();
+		worldRenderer.render();
 		player.draw(batch);
 		batch.end();
 	}
 
 	private void handleInput() {
-		Float speed = 0.01f;
+		Float speed = 0.1f;
 		if (Gdx.input.isKeyPressed(Input.Keys.A)) {
 			cam.zoom += 0.02;
 		}
@@ -89,17 +88,6 @@ public class MainScreen implements Screen {
 			cam.translate(0, speed, 0);
 			player.setPosition(player.getPosition().add(new Vector2(0, speed)));
 		}
-
-		/*
-		 * 
-		 * cam.zoom = MathUtils.clamp(cam.zoom, 0.1f, 100/cam.viewportWidth);
-		 * 
-		 * float effectiveViewportWidth = cam.viewportWidth * cam.zoom; float
-		 * effectiveViewportHeight = cam.viewportHeight * cam.zoom;
-		 * 
-		 * cam.position.x = MathUtils.clamp(cam.position.x, -100, 100); cam.position.y =
-		 * MathUtils.clamp(cam.position.y, -100, 100 );
-		 */
 	}
 
 	@Override

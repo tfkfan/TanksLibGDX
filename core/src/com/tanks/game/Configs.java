@@ -17,4 +17,8 @@ public class Configs {
 	
 	public static final float VIEW_WIDTH = 1200;
 	public static final float VIEW_HEIGHT = 900;
+	
+	public static final int BRICK_CODE = 1;
+	public static final int WALL_CODE = 2;
+	public static final int EMPTY_CODE = 0;
 }
